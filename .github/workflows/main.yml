@@ -75,17 +75,19 @@ jobs:
           ./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -DexcludedGroups="db-connected-tests"
         
           pushTag=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-  
-#          docker tag vsts/$IMAGE:$GITHUB_SHA $pushTag
-          
           docker image list
-#          docker push $pushTag
+  
+  
+          docker tag vsts/$IMAGE:$GITHUB_SHA $pushTag
+          
+          
+          docker push $pushTag
           
           export image_tag=$pushTag
           export IMAGE_NAME=$IMAGE
   
           envsubst < deployment.template.yml > deployment.yaml
 
-#      - name: Deploy
-#        run: |-
-#          kubectl apply -f deployment.yaml
+      - name: Deploy
+        run: |-
+          kubectl apply -f deployment.yaml
