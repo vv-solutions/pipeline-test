@@ -57,6 +57,7 @@ jobs:
 
       # Build the Docker image
       - name: Build
+        shell: bash
         run: |-
           ./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -DexcludedGroups="db-connected-tests"
         
