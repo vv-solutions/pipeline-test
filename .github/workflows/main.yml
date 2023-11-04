@@ -75,9 +75,13 @@ jobs:
         run: |-
           ./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -DexcludedGroups="db-connected-tests"
         
+          echo "HERE 1"
           pushTag= $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE:$GITHUB_SHA
+          
+          echo "HERE 2"
           pushTag= "europe-central2-docker.pkg.dev/kube-403208/quarkus/$IMAGE:$GITHUB_SHA"
-  
+          
+          echo "HERE 3"
   
           docker tag runner/$IMAGE:1.0.0-SNAPSHOT $pushTag
           
