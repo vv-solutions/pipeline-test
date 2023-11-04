@@ -76,16 +76,16 @@ jobs:
         
           pushTag=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
   
-          docker tag vsts/$IMAGE:$GITHUB_SHA $pushTag
+#          docker tag vsts/$IMAGE:$GITHUB_SHA $pushTag
           
           docker image list
-          docker push $pushTag
+#          docker push $pushTag
           
           export image_tag=$pushTag
           export IMAGE_NAME=$IMAGE
   
           envsubst < deployment.template.yml > deployment.yaml
 
-      - name: Deploy
-        run: |-
-          kubectl apply -f deployment.yaml
+#      - name: Deploy
+#        run: |-
+#          kubectl apply -f deployment.yaml
