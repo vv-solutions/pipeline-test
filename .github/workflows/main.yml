@@ -81,7 +81,13 @@ jobs:
   
           docker tag runner/$IMAGE:1.0.0-SNAPSHOT $pushTag
           
+          echo "LISTING IMAGES"
+          
+          
           docker image list
+          
+          
+          
           docker push $pushTag
           
           export image_tag=$pushTag
