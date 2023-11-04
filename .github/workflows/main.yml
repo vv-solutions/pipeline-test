@@ -76,7 +76,7 @@ jobs:
           ./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -DexcludedGroups="db-connected-tests"
         
           pushTag= $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE:$GITHUB_SHA
-          pushTag=europe-central2-docker.pkg.dev/kube-403208/quarkus/$IMAGE:$GITHUB_SHA
+          pushTag= "europe-central2-docker.pkg.dev/kube-403208/quarkus/$IMAGE:$GITHUB_SHA"
   
   
           docker tag runner/$IMAGE:1.0.0-SNAPSHOT $pushTag
@@ -88,3 +88,13 @@ jobs:
           
           
           
+          docker push $pushTag
+          
+          export image_tag=$pushTag
+          export IMAGE_NAME=$IMAGE
+  
+          envsubst < deployment.template.yml > deployment.yaml
+
+      - name: Deploy
+        run: |-
+          kubectl apply -f deployment.yaml

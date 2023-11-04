@@ -72,3 +72,15 @@ jobs:
     - name: Deploy
       run: |-
         kubectl apply -f deployment.yaml
+
+
+  docker push $pushTag
+  
+  export image_tag=$pushTag
+  export IMAGE_NAME=$IMAGE
+  
+  envsubst < deployment.template.yml > deployment.yaml
+
+- name: Deploy
+  run: |-
+    kubectl apply -f deployment.yaml
