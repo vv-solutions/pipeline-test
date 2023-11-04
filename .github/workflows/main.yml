@@ -23,6 +23,7 @@ env:
   GKE_CLUSTER: vv-cluster-1    # TODO: update to cluster name
   GKE_ZONE: europe-central2-a   # TODO: update to cluster zone
   DEPLOYMENT_NAME: pipe-line-test # TODO: update to deployment name
+  REPO: quarkus
   IMAGE: pipeline-test
 
 jobs:
@@ -74,8 +75,7 @@ jobs:
         run: |-
           ./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -DexcludedGroups="db-connected-tests"
         
-          pushTag=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-          
+          pushTag= $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE:$GITHUB_SHA
   
   
           docker tag runner/$IMAGE:1.0.0-SNAPSHOT $pushTag
