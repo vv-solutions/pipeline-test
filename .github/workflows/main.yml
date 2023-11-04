@@ -79,7 +79,7 @@ jobs:
           pushTag=$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE:$GITHUB_SHA
           
           echo "HERE 2"
-          export pushTag=europe-central2-docker.pkg.dev/kube-403208/quarkus/$IMAGE:$GITHUB_SHA
+          pushTag=europe-central2-docker.pkg.dev/kube-403208/quarkus/$IMAGE:$GITHUB_SHA
           
           echo "HERE 3"
   
