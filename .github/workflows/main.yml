@@ -16,7 +16,7 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: cluster-1    # Add your cluster name here.
+  GKE_CLUSTER: vv-cluster-1    # Add your cluster name here.
   GKE_ZONE: europe-central-A   # Add your cluster zone here.
   DEPLOYMENT_NAME: pipe-line-test # Add your deployment name here.
   IMAGE: pipeline-test
