@@ -21,7 +21,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GAR_LOCATION: europe-central2 # TODO: update region of the Artifact Registry
   GKE_CLUSTER: vv-cluster-1    # TODO: update to cluster name
-  GKE_ZONE: europe-central2-c   # TODO: update to cluster zone
+  GKE_ZONE: europe-central2-a   # TODO: update to cluster zone
   DEPLOYMENT_NAME: pipe-line-test # TODO: update to deployment name
   IMAGE: pipeline-test
 
@@ -41,7 +41,7 @@ jobs:
 
       # Configure Workload Identity Federation and generate an access token.
       - id: auth
-        uses: 'google-github-actions/auth@v0'
+        uses: google-github-actions/auth@v0
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
