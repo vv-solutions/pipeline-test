@@ -32,6 +32,3 @@ spec:
       containers:
         - name: ${IMAGE_NAME}
           image: ${image_tag}
-
-      imagePullSecrets:
-        - name: regcred
