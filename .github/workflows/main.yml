@@ -55,11 +55,18 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GAR_LOCATION }}
 
+      - name: Create settings XML
+        uses: whelk-io/maven-settings-xml-action@v20
+        with:
+          repositories: '[{ "id": "central", "url": "https://repo1.maven.org/maven2" },{ "id": "github", "url": "https://maven.pkg.github.com/vv-solutions/packages" }]'
+          servers: '[{ "id": "github", "username": "${{ secrets.PACKAGE_DEPLOY_USERNAME }}", "password": "${{ secrets.PACKAGE_DEPLOY_TOKEN }}" }]'
+          output_file: settings.xml
+
       # Build the Docker image
       - name: Build
         shell: bash
         run: |
-          ./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -DexcludedGroups="db-connected-tests"
+          ./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -DexcludedGroups="db-connected-tests" --settings settings.xml
           
           pushTag=europe-central2-docker.pkg.dev/kube-403208/quarkus/$IMAGE:$GITHUB_SHA
           
